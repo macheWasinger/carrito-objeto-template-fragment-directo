@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>DesafioLatam-JavaScript</title>
+    <link rel="stylesheet" href="style.css" />
+
+    <style>
+      #reloj {
+        width: 400px;
+        height: 300px;
+        background-color: yellow;
+        margin: auto;
+      }
+    </style>
+  </head>
+  <body>
+    <!--///////// ## DOM /////////-->
+    <!-- EJERCICIO 1 -->
+    <!-- <p id="demo">:(</p> -->
+
+    <!--////// Jquery selectores //////-->
+    <!-- EJERCICIO 1 -->
+    <form id="firstForm">
+      <label name="first_name_label" id="label-firstName">First name:</label>
+      <br />
+      <input type="text" id="nombre" name="firstname" />
+      <br />
+      Last name:
+      <br />
+      <input type="text" id="lastName" name="lastname" />
+      <br />
+      <input type="radio" id="inputMale" name="sex" value="male" checked />Male
+      <br />
+      <input type="radio" id="inputFemale" name="sex" value="female" />Female
+      <br />
+      Favorite day of the week:
+      <br />
+      <select
+        name="fav_day"
+        id="diaFavorito"
+        class="diaSeleccionado"
+        onchange="diaSelect()"
+      >
+        <option value="Friday">Friday</option>
+        <option value="Saturday">Saturday</option>
+        <option value="Monday">Monday</option>
+      </select>
+      <br />
+    </form>
+
+    <br /><br />
+
+    <form id="secondForm">
+      What's your major:
+      <br />
+      <input type="text" name="major" />
+      <br />
+      What's your job title:
+      <br />
+      <input type="text" name="job_title" />
+      <br />
+
+      Do you like challenges:
+      <br />
+      <input type="radio" name="challenge" value="yes" checked />Yes
+      <br />
+      <input type="radio" name="challenge" value="no" />No
+    </form>
+    <button id="btnEnviar">Enviar</button>
+    <!--/////////////////////////-->
+
+    <p id="idMensaje"></p>
+    <script src="index.js"></script>
+  </body>
+</html>

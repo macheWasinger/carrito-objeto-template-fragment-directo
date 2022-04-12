@@ -1,0 +1,121 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/*
+body {
+  display: flex;
+  flex-direction: column;
+}
+
+.container-principal {
+  width: 500px;
+  height: 450px;
+  display: flex;
+  border: 1px solid grey;
+}
+
+.title {
+  font-weight: 600;
+  margin-right: 8.5em;
+}
+
+.colors-container {
+  width: 70px;
+  height: 450px;
+  border: 1px solid grey;
+  display: flex;
+  flex-direction: column;
+}
+
+.colors-container > div {
+  width: auto;
+  height: 100%;
+  border: 1px solid grey;
+}
+
+.color1 {
+  background-color: #e23e3b;
+}
+
+.color2 {
+  background-color: #dc6c1a;
+}
+
+.color3 {
+  background-color: #fbee8d;
+}
+
+.color4 {
+  background-color: #48bc77;
+}
+
+.color5 {
+  background-color: #81e5d7;
+}
+
+.color6 {
+  background-color: #d93c8b;
+}
+*/
+
+/************* Cambio de imágenes *************/
+/*
+.container-img {
+  width: 650px;
+  height: 350px;
+  margin-top: 10%;
+  border: 5px solid red;
+  box-shadow: 2px 3px 4px #000;
+}
+
+#idImg {
+  width: 100%;
+  height: 100%;
+}
+*/
+/***********************************************/
+
+/************* Esconder elementos *************/
+
+#containerElementos {
+  width: 75vw;
+  height: auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 15vw;
+  padding: 2vw;
+  background-color: grey;
+  border-radius: 10px;
+  box-shadow: 4px 6px 8px rgb(41, 41, 41);
+}
+
+#imgContainer {
+  width: 17vw;
+  height: 12vw;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background-color: blue;
+}
+
+#idImg {
+  width: 90%;
+  height: 80%;
+  margin: auto;
+  border: 1px solid #000;
+}
+
+#idVer {
+  font-size: 18px;
+  font-weight: 600;
+  color: #fff;
+  /* text-shadow: 1px 2px 3px #000; */
+  text-shadow: 1px 0 0 #000, 0 1px 0 #000, -1px 0 0 #000, 0 -1px 0 #000;
+  margin: auto;
+}
+
+/***********************************************/
