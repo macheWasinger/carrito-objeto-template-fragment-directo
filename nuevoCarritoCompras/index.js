@@ -1,24 +1,55 @@
 const carrito = document.getElementById("carrito");
 const template = document.getElementById("template");
+const footer = document.getElementById("footer");
+const templateFooter = document.getElementById("templateFooter");
 const fragment = document.createDocumentFragment();
 // Creo el FRAGMENT para evitar el REFLOW.
 
-const btnesBotones = document.querySelectorAll(".card .btn"); // Pongo "querySelectorAll" porque son varios botones y los vamos a buscar dentro de la clase ".card"
+// Esta es una DELEGACIÓN DE EVENTOS porque capturo todo el DOCUMENT.
+document.addEventListener("click", (e) => {
+  // console.log(e.target.matches(".card .btn-outline-primary"));
+  // Desde la clase ".card" del DIV padre, selecciono al button AGREGAR que se encuentra dentro mediante su clase "btn-outline-primary". Entonces, si hago CLICK en el botón AGREGAR, me devuelve TRUE, en caso contrario, devuelve FALSE.
 
-const carritoObjeto = []; // Este es un ARRAY VACÍO y lo uso más adelante para guardar la cantidad de OBJETOS frutas AGREGADAS.
+  if (e.target.matches(".card .btn-outline-primary")) {
+    // SI al hacer CLICK en el botón AGREGAR, me devuelve TRUE, llama a la función "agregarAlCarrito(e);"
+
+    agregarAlCarrito(e); // llamo a la función
+  }
+
+  // console.log(e.target.matches(".list-group-item .btn-success"));
+  // Cuando hago click en el botón AGREGAR de un objeto, me va a devolver TRUE. En cambio, si hago click en cualquier parte, me va a devolver FALSE.
+
+  if (e.target.matches("#carrito .list-group-item .btn-success")) {
+    // Si hago CLICK en el botón AGREGAR y me devuelve TRUE, hago lo siguiente:
+    btnAumentar(e); // llamo a la arrow function.
+  }
+
+  if (e.target.matches("#carrito .list-group-item .btn-danger")) {
+    btnDisminuir(e);
+  }
+});
+
+let carritoObjeto = []; // Este es un ARRAY VACÍO y lo uso más adelante para guardar la cantidad de OBJETOS frutas AGREGADAS.
 
 const agregarAlCarrito = (e) => {
-  console.log(e.target.dataset.fruta); // Con el "dataset", devuelvo el valor del "data-fruta" que cree en las etiquetas del HTML.
+  // console.log(e.target.dataset.fruta);
+  // console.log(e.target.dataset.precio);
+  // Con el "dataset", devuelvo los valores del "data-fruta" y "data-precio" que creé en las etiquetas "button" del HTML.
 
+  // Necesito los valores "e.target.dataset.fruta" y "e.target.dataset.precio" para poder crear los objetos de "producto".
   const producto = {
     titulo: e.target.dataset.fruta,
     id: e.target.dataset.fruta,
     cantidad: 1,
+    precio: parseInt(e.target.dataset.precio),
   };
 
+  // console.log(producto);
+
+  // Verifico si existe el objeto en el array "carritoObjeto";
   const indice = carritoObjeto.findIndex((item) => item.id === producto.id); // El "findIndex", lo que hace es devolver -1 si el array está vacío.
 
-  console.log(indice);
+  // console.log("indice: " + indice);
 
   if (indice === -1) {
     carritoObjeto.push(producto); // El elemento se va a empujar una sola vez dentro del array "carritoObjeto" y van a tener los indices (0, 1, 2) porque son 3 elementos.
@@ -28,32 +59,90 @@ const agregarAlCarrito = (e) => {
 
   console.log(carritoObjeto);
 
-  pintarCarrito(carritoObjeto);
-
-  //   console.log(carritoObjeto);
+  pintarCarrito();
 };
 
-const pintarCarrito = (array) => {
+const pintarCarrito = () => {
   // Como al hacer click en cada botón AGREGAR de cada fruta, el forEach se repite y pinta en pantalla a todos los textos de las frutas, agrego el siguiente comando para solucionar dicho problema:
   carrito.textContent = ""; // El contenido del texto va a iniciar vacío para que no se repitan los textos "frutilla, banana y manzana", cada vez que hago click en el botón "agregar" de cada fruta nombrada.
 
   // "Object.values(carritoObjeto).forEach((item) => {}", sirve para transformar un OBJETO en un ARRAY. Pero ya no lo voy a usar porque voy a recorrer el "array" que le paso como parámetro a la arrow function "pintarCarrito".
-  array.forEach((item) => {
+  carritoObjeto.forEach((item) => {
     // EL "forEach" ITERA EN ARRAYS Y NO EN OBJETOS.
-    // Para no cometer errores, uso el ".firstElementChild" que retorna el primer hijo del objeto Element, o bien null si no existen elementos hijos.
-    const clone = template.content.firstElementChild.cloneNode(true);
-    clone.querySelector(".lead").textContent = item.titulo;
+    // Para no cometer errores, uso el ".firstElementChild" que retorna el primer hijo del objeto Element, o bien null si no existen elementos hijos(borré el "firstElementChild" porque ya no lo necesito).
+    const clone = template.content.cloneNode(true);
+
+    // En la clase "text-white", encuentra al elemento con la clase "lead", y le cambia el título mediante el "textContent".
+    clone.querySelector(".text-white .lead").textContent = item.titulo;
     clone.querySelector(".badge").textContent = item.cantidad;
 
-    fragment.appendChild(clone); // La variable "clone" la agrego al fragment para evitar el "reflow".
+    clone.querySelector("div .lead span").textContent =
+      item.precio * item.cantidad;
+
+    clone.querySelector(".btn-danger").dataset.id = item.id; // Al hacer click, obtengo el "id" de botón QUITAR del objeto "frutilla, banana o manzana".
+
+    clone.querySelector(".btn-success").dataset.id = item.id; // Al hacer click, obtengo el "id" de botón AGREGAR del objeto "frutilla, banana o manzana".
+
+    fragment.appendChild(clone); // Todo lo hecho en las lineas anteriores (en cada ciclo del forEach), lo almaceno dentro del FRAGMENT (ya que no está en nuestro DOM), por lo tanto, evitamos el REFLOW.
   });
 
-  carrito.appendChild(fragment);
+  carrito.appendChild(fragment); // Una vez que terminan los ciclos del forEach, empujamos el FRAGMENT a nuestro sitio web (o sea, a nuestro DOM).
+  pintarFooter();
 };
 
-btnesBotones.forEach((btn) => {
-  btn.addEventListener("click", agregarAlCarrito);
-});
+const pintarFooter = () => {
+  console.log("pintar footer");
+  footer.textContent = "";
+
+  const total = carritoObjeto.reduce(
+    // "acc" es el ACUMULADOR del total del valor del objeto fruta.
+    // "current" es el VALOR ACTUAL de cada objeto FRUTA. Como "current" es el que recorre y toma a cada objeto FRUTA del array "carritoObjeto", con "current.cantidad" y "current.precio", obtengo los valores de las propiedades "cantidad y precio" de cada objeto FRUTA, y los multiplico entre sí para obtener el valor total de cada uno.
+    (acc, current) => acc + current.cantidad * current.precio,
+    0 // El número 0, es el segundo parámetro del método "reduce". Sirve para decir como queremos que se devuelva el valor del resultado final de la función CALLBACK del primer parámetro. O sea, que se va a devolver como un ENTERO.
+
+    // "(acc, current) => acc + current.cantidad * current.precio", es un CALLBACK, es el primer parámetro del método "reduce".
+  );
+
+  if (total !== 0) {
+    const clone = templateFooter.content.cloneNode(true);
+    clone.querySelector("span").textContent = total;
+
+    // Como en esta función no tenemos ciclos (ya que no hay un forEach), por lo tanto, al no repetirse el ciclo constantemente, podemos empujar el "clone" directamente al FOOTER sin tener que utilizar el FRAGMENT.
+    footer.appendChild(clone);
+  }
+};
+
+const btnAumentar = (e) => {
+  // El evento tiene el TARGET y el botón tiene el "dataset" con el ID correspondiente.
+  // console.log("me diste click: ", e.target.dataset.id);
+
+  carritoObjeto = carritoObjeto.map((item) => {
+    if (item.id === e.target.dataset.id) {
+      item.cantidad++;
+    }
+    return item;
+  });
+
+  pintarCarrito();
+};
+
+const btnDisminuir = (e) => {
+  carritoObjeto = carritoObjeto.filter((item) => {
+    if (item.id === e.target.dataset.id) {
+      if (item.cantidad > 0) {
+        item.cantidad--;
+        if (item.cantidad === 0) {
+          return; // Pongo "return" para que no devuelva nada si es que no hay ningún elemento.
+        }
+        return item;
+      }
+    } else {
+      return item; // Si el ID del objeto fruta, NO es igual al ID seleccionado, va a retornar a los demás items.
+    }
+  });
+
+  pintarCarrito();
+};
 
 /************ EJEMPLO "BURBUJEO" ************/
 /*
@@ -89,7 +178,8 @@ cajitas.forEach((caja) => {
 const ancla = document.querySelector("a");
 ancla.addEventListener("click", (e) => {
   console.log("Me diste CLICK");
-  e.preventDefault(); // El preventDefault(), sirve para EVITAR que la página web se actualice por defecto cada vez que hago click. En este caso, al evitar el comportamiento por defecto, el ANCLA no puede enviar el valor del "href" a la URL, ya que le página web nunca se actualiza y queda estática.
+  e.preventDefault(); 
+  // El preventDefault(), sirve para EVITAR que la página web se actualice por defecto cada vez que hago click. En este caso, al evitar el comportamiento por defecto, el ANCLA no puede enviar el valor del "href" a la URL, ya que le página web nunca se actualiza y queda estática.
 });
 */
-/*----------------------------------------*/
+/*---------------------------------------------*/
