@@ -1,0 +1,104 @@
+* {
+  box-sizing: border-box;
+  list-style: none;
+}
+
+.h2-title {
+  font-size: 30px;
+  text-shadow: 1px 2px 3px orange;
+  display: flex;
+  justify-content: center;
+}
+
+.style_main-tecnology {
+  width: 500px;
+  height: auto;
+  /* background-color: rgb(255, 210, 126); */
+  display: flex;
+  justify-content: space-between;
+  margin: auto;
+  border: 1px solid rgb(255, 210, 126);
+  border-radius: 5px;
+}
+
+article {
+  /* background-color: red; */
+  margin: 20px;
+}
+
+article div img {
+  width: 110px;
+  height: 90px;
+}
+
+.style-card {
+  /* background-color: yellow; */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.container-cantProductos {
+  width: 1.8em;
+  height: 1.8em;
+  border-radius: 50%;
+  background-color: orange;
+  display: grid;
+  place-items: center;
+  padding: 3px;
+  margin: 5px;
+}
+
+.list-products {
+  display: flex;
+  align-items: center;
+  background-color: grey;
+}
+
+.cantProduct {
+  color: #fff;
+  font-weight: 600;
+  font-size: 18px;
+}
+
+.titleProduct {
+  font-size: 17px;
+  margin-left: 15px;
+  margin-top: 1.1vw;
+  color: #fff;
+}
+
+#idTitle {
+  font-size: 15px !important;
+}
+
+#idButtonAgregar {
+  border-radius: 3px;
+  font-size: 14px;
+}
+
+#idTemplate {
+  margin: 50px !important;
+}
+
+#idTotalProduct {
+  position: relative;
+  top: 0.4em;
+}
+
+.precioTotal {
+  font-size: 20px;
+}
+
+.container-buttons button {
+  padding: 0.3em;
+  font-size: 14px;
+  color: #fff;
+  line-height: 1.3em;
+}
+
+.container-buttons button:hover {
+  color: #fff;
+  transform: scale(1.05);
+}
