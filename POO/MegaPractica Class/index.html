@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
+      crossorigin="anonymous"
+    />
+
+    <title>MegaPractica Class</title>
+  </head>
+  <body>
+    <div class="container my5">
+      <h1>Estudiantes y Profesores</h1>
+      <form id="formulario">
+        <!-- Como vamos a usar el "formData" que viene de JavaScript, uso el atributo "name" para poder capturar el INPUT. -->
+        <input
+          type="text"
+          class="form-control mb-2"
+          name="nombre"
+          placeholder="Ingrese nombre"
+          required
+        />
+        <input
+          type="text"
+          class="form-control mb-2"
+          name="number"
+          placeholder="Ingrese edad"
+          required
+        />
+
+        <!-- Dentro del atributo "name" con valor "opcion", va a viajar el ESTUDIANTE o PROFESOR, según la opción que yo elija. -->
+        <select
+          class="form-select mb-2"
+          name="opcion"
+          aria-label="Default select example"
+        >
+          <!-- El atributo "aria-label", no hay que sacarla. Ya que, es una ayuda para la gente no vidente. -->
+
+          <option value="Estudiante" selected>Estudiante</option>
+          <option value="Profesor">Profesor</option>
+        </select>
+
+        <button class="btn btn-primary" type="submit">Agregar</button>
+      </form>
+
+      <section class="row mt-3">
+        <!--////// CONTENEDOR "ESTUDIANTES" //////
+        Gracias al id "cardsEstudiantes", voy a pintar dentro de este contenedor a los cards de los estudiantes.
+        -->
+        <div class="col-6" id="cardsEstudiantes"></div>
+
+        <!--////// CONTENEDOR "PROFESORES" //////
+        Gracias al id "cardsProfesores", voy a pintar dentro de este contenedor a los cards de los profesores.
+        -->
+        <div class="col-6" id="cardsProfesores"></div>
+      </section>
+    </div>
+
+    <!-- ********* TEMPLATE ESTUDIANTE ********* -->
+    <template id="templateEstudiante">
+      <!-- La clase de Bootstrap "card", le da un border de 1px aprox y un border-radius de 3 o 4px aprox a todo el article. Por lo que, le da un estilo similar a la de una carta y la clase "mb-2", le da un "margin-bottom de 2" -->
+      <article class="card mb-2">
+        <!-- "card-body" es una clase de BOOTSTRAP que está hecha especialmente para el contenido.  -->
+        <div class="card-body">
+          <h5>
+            <span class="text-primary">Nombre</span>
+
+            <!-- La clase de bootstrap "badge", sirve para crear un contendor similar a un "botón" dependiendo del contenido. O sea que, en este caso, el tamaño del botón va a depender de la longitud del texto "Aprobado".
+                "bg" significa "background". Por lo que, "bg-success" significa "background-success" y va a ser un fondo en color ver.
+                -->
+            <span class="badge bg-success">Aprobado</span>
+          </h5>
+          <h6>Estudiante</h6>
+
+          <!-- La clase de bootstrap "lead", sirve para hacer que resalte el texto (en este caso, "edad"), y le da un font-weight más finito y detallado. -->
+          <p class="lead">Edad</p>
+          <button class="btn btn-success">Aprobar</button>
+          <button class="btn btn-danger">Reprobar</button>
+        </div>
+      </article>
+    </template>
+
+    <!-- ********* TEMPLATE PROFESOR ********* -->
+    <template id="templateProfesor">
+      <!-- La clase de Bootstrap "bg-dark", le da un fondo oscuro al contenedor "article". 
+        Sería como decir: "background: black";
+        
+        La clase de Bootstrap "card", le da un border de 1px aprox y un border-radius de 3 o 4px aprox a todo el article. Por lo que, le da un estilo similar a la de una carta y la clase "mb-2", le da un "margin-bottom de 2"
+        -->
+      <article class="card mb-2 bg-dark text-white">
+        <div class="card-body">
+          <h5>Nombre</h5>
+          <h6>Profesor</h6>
+          <p class="lead">Edad</p>
+        </div>
+      </article>
+    </template>
+    <script src="app.js"></script>
+  </body>
+</html>

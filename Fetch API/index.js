@@ -7,7 +7,7 @@ document.addEventListener("DOMContentLoaded", () => {
 const fetchData = async () => {
   // console.log("Obteniendo datos");
   try {
-    loadingData(true); // Si todavía no cargo completamente el DOM, a la función "loadingData(true)", le paso como parámetro un TRUE para que APAREZCA el efecto CARGANDO en pantalla.
+    loadingData(true); // Si todavía no cargó completamente el DOM, a la función "loadingData(true)", le paso como parámetro un TRUE para que APAREZCA el efecto CARGANDO en pantalla.
 
     // En el "fetch", SIEMPRE son dos "await" porque son dos PROMESAS (Promise) que van a venir.
     // El "await", lo uso para EVITAR usar el "then y el catch".

@@ -1,0 +1,14 @@
+* {
+  box-sizing: border-box;
+}
+
+.container-search {
+  width: 350px;
+  background-color: yellow;
+  margin: auto;
+  margin-bottom: 20px;
+}
+
+input {
+  width: 80%;
+}
